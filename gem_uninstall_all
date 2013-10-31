@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+# vim: set fileencoding=utf-8
+
+gem_list = %x!gem list --no-version!
+gem_list.each_line do |line|
+  next if line.empty? || /LOCAL GEMS/ =~ line
+  system "gem uninstall -axI #{line}"
+end
+
